@@ -55,16 +55,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Contrast: 0.7
+    - _Contrast: 2.26
     - _Cracks_Flatten: 0.75
     - _MaskTopLayer: 0
     - _Projection_Contrast: 1
-    - _Rock_Brightness: 0.16
+    - _RockMetallic: 1.32
+    - _Rock_Brightness: 0.18
     - _Rock_Normal_Flatten: 0.4
     - _Rock_Scale: 25
     - _Side_Project_Only: 0
+    - _Smoothness: 0.17
     - _TopGrass: 0
     - _UseSmoothedNormalMap: 1
-    m_Colors: []
+    m_Colors:
+    - _Rock_Tint: {r: 0.9339623, g: 0.7325358, b: 0.71809363, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
