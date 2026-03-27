@@ -34,6 +34,8 @@ public class SceneController : MonoBehaviour
             loadingScreenRoot.SetActive(false);
     }
 
+    // -- API --
+
     public void LoadScene(string sceneName)
     {
         if (isLoading) return;
