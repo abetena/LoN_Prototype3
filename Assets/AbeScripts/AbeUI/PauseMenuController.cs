@@ -6,15 +6,15 @@ using TMPro;
 public class PauseMenuController : MonoBehaviour
 {
     [Header("Pause Menu UI")]
-    public GameObject pauseMenuRoot;
+    public GameObject pauseMenuPanel;
     public Slider lookSensitivitySlider;
     public TMP_Text lookSensitivityValueLabel;
 
     [Header("Input")]
-    public InputActionReference pauseAction; // Drag the Pause action here from the Input Actions asset.
+    public InputActionReference pauseAction;
 
     [Header("Player Reference")]
-    public FirstPersonLook playerLook;
+    public FirstPersonLook playerLook; // Drag the exact object that has FirstPersonLook.cs
 
     [Header("Look Sensitivity Settings")]
     public float minLookSensitivity = 0.1f;
@@ -36,26 +36,24 @@ public class PauseMenuController : MonoBehaviour
 
     private void Start()
     {
-        if (pauseMenuRoot != null)
-            pauseMenuRoot.SetActive(false);
+        if (pauseMenuPanel != null)
+            pauseMenuPanel.SetActive(false);
 
         if (playerLook == null)
-            playerLook = FindFirstObjectByType<FirstPersonLook>();
+        {
+            Debug.LogWarning("PauseMenuController: playerLook is not assigned in the Inspector.");
+            return;
+        }
 
-        if (lookSensitivitySlider != null && playerLook != null)
+        if (lookSensitivitySlider != null)
         {
             lookSensitivitySlider.minValue = minLookSensitivity;
             lookSensitivitySlider.maxValue = maxLookSensitivity;
-
-            // Use the sensitivity already authored in FirstPersonLook as the starting slider value.
             lookSensitivitySlider.value = playerLook.sensitivityX;
-
             lookSensitivitySlider.onValueChanged.AddListener(SetLookSensitivity);
         }
 
-        if (playerLook != null)
-            SetLookSensitivity(playerLook.sensitivityX);
-
+        SetLookSensitivity(playerLook.sensitivityX);
         ResumeGame();
     }
 
@@ -70,22 +68,18 @@ public class PauseMenuController : MonoBehaviour
             else
                 PauseGame();
         }
-
-        // Reconnect the reference if the player object was recreated after a scene load.
-        if (playerLook == null)
-            playerLook = FindFirstObjectByType<FirstPersonLook>();
     }
 
     public void PauseGame()
     {
         isPaused = true;
-        Time.timeScale = 0f; // Freeze gameplay while the pause menu is open.
+        Time.timeScale = 0f;
 
-        if (pauseMenuRoot != null)
-            pauseMenuRoot.SetActive(true);
+        if (pauseMenuPanel != null)
+            pauseMenuPanel.SetActive(true);
 
         if (playerLook != null)
-            playerLook.enabled = false;
+            playerLook.DisableLook();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -96,11 +90,11 @@ public class PauseMenuController : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;
 
-        if (pauseMenuRoot != null)
-            pauseMenuRoot.SetActive(false);
+        if (pauseMenuPanel != null)
+            pauseMenuPanel.SetActive(false);
 
         if (playerLook != null)
-            playerLook.enabled = true;
+            playerLook.EnableLook();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -108,23 +102,18 @@ public class PauseMenuController : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        Time.timeScale = 1f; // Always restore time before changing scenes.
+        Time.timeScale = 1f;
 
         if (SceneController.Instance != null)
-        {
             SceneController.Instance.LoadMainMenu();
-        }
         else
-        {
             Debug.LogWarning("No SceneController found in the scene.");
-        }
     }
 
     public void SetLookSensitivity(float value)
     {
         if (playerLook != null)
         {
-            // The pause menu directly changes the public sensitivity floats in FirstPersonLook.
             playerLook.sensitivityX = value;
             playerLook.sensitivityY = value;
         }

@@ -1,47 +1,66 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-//This script uses Unity's new I put system to rotate the player left to right, and rotate the camera up and down
+// This script uses Unity's new Input System to rotate the player left/right
+// and tilt the camera up/down.
 public class FirstPersonLook : MonoBehaviour
 {
-
     [Header("Mouse Sensitivity Settings")]
-    public float sensitivityX = 1.0f; //Horizontal mouse sensitivity
-    public float sensitivityY = 1.0f; //Vertical mouse sensitivity
+    public float sensitivityX = 1.0f;
+    public float sensitivityY = 1.0f;
 
     [Header("Camera Setup")]
-    public Transform cameraRoot; //Reference to the empty object (CameraRoot) that is referenced by Cinemachine camera
+    public Transform cameraRoot;
 
-    // Internal state to track accumulated look angles
-    private float yaw;//Horizontal rotation (Y axis, rotates the player)
-    private float pitch;//Vertical rotation (X axis, rotates the camera's pivot)
+    private float yaw;
+    private float pitch;
 
+    [HideInInspector]
+    public bool canLook = true;
 
-    InputAction lookAction; // Look input (mouse delta / right stick)
+    private InputAction lookAction;
 
-    // Lock the cursor when the game starts and declare the Look Action
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         lookAction = InputSystem.actions.FindAction("Look");
-        lookAction.Enable();
+
+        if (lookAction != null)
+            lookAction.Enable();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-//Actions every frame
     public void Update()
     {
-        //Get the movement delta from the input (mouse or stick)
+        if (!canLook || lookAction == null)
+            return;
+
         Vector2 delta = lookAction.ReadValue<Vector2>();
 
-        // Adjust yaw (horizontal) and apply it directly to the player's Y-axis rotation
         yaw = delta.x * sensitivityX;
         transform.Rotate(0f, yaw, 0f);
 
-        // Accumulate and clamp pitch
         pitch -= delta.y * sensitivityY;
-        pitch = Mathf.Clamp(pitch, -60f, 60f); //the camera can't spin more or less than 60 degrees up or down, adjust if necessary
+        pitch = Mathf.Clamp(pitch, -60f, 60f);
 
-        // Apply pitch
         cameraRoot.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+    }
+
+    public void DisableLook()
+    {
+        canLook = false;
+
+        // Disabling the action is stronger than only checking a bool.
+        if (lookAction != null)
+            lookAction.Disable();
+    }
+
+    public void EnableLook()
+    {
+        canLook = true;
+
+        if (lookAction != null)
+            lookAction.Enable();
     }
 }
