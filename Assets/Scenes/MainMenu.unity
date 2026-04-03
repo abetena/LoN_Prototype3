@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 478735727}
   - component: {fileID: 478735729}
   m_Layer: 5
-  m_Name: MainMenuRoot
+  m_Name: MainMenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -914,7 +914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 216}
   m_SizeDelta: {x: 1370.3636, y: 184.8309}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1784604234
@@ -1231,9 +1231,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7779659611894259576, guid: 63d624ce8220746fe89103ed2682741c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8855015196514835072, guid: 63d624ce8220746fe89103ed2682741c, type: 3}
       propertyPath: m_Name
       value: LoadingScreenCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8855015196514835072, guid: 63d624ce8220746fe89103ed2682741c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8947498412288535718, guid: 63d624ce8220746fe89103ed2682741c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
