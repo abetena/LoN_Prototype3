@@ -277,7 +277,6 @@ GameObject:
   - component: {fileID: 478735726}
   - component: {fileID: 478735728}
   - component: {fileID: 478735727}
-  - component: {fileID: 478735729}
   m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
@@ -342,19 +341,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 478735725}
   m_CullTransparentMesh: 1
---- !u!114 &478735729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 478735725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 191e54370823f480a8f609c64cdd5087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainMenuUI
-  firstGameplayScene: Lvl1
 --- !u!1 &507124849
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +424,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 478735729}
+      - m_Target: {fileID: 1831558773}
         m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
@@ -1029,6 +1015,7 @@ GameObject:
   - component: {fileID: 1831558772}
   - component: {fileID: 1831558771}
   - component: {fileID: 1831558770}
+  - component: {fileID: 1831558773}
   m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
@@ -1121,6 +1108,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1831558773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831558768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191e54370823f480a8f609c64cdd5087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuUI
+  firstGameplayScene: Lvl1
 --- !u!114 &2043125865 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1097581234484069093, guid: 63d624ce8220746fe89103ed2682741c, type: 3}
@@ -1233,7 +1233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7779659611894259576, guid: 63d624ce8220746fe89103ed2682741c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8855015196514835072, guid: 63d624ce8220746fe89103ed2682741c, type: 3}
       propertyPath: m_Name
@@ -1241,7 +1241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855015196514835072, guid: 63d624ce8220746fe89103ed2682741c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8947498412288535718, guid: 63d624ce8220746fe89103ed2682741c, type: 3}
       propertyPath: m_IsActive
